@@ -1,0 +1,35 @@
+import { Link } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
+import type { Tables } from "@/integrations/supabase/types";
+
+interface TempleCardProps {
+  temple: Tables<"temples">;
+}
+
+export default function TempleCard({ temple }: TempleCardProps) {
+  return (
+    <Link to={`/temples/${temple.id}`}>
+      <Card className="group overflow-hidden border-border shadow-card hover:shadow-warm transition-all duration-300">
+        <div className="aspect-[16/9] overflow-hidden bg-muted">
+          {temple.image_url ? (
+            <img
+              src={temple.image_url}
+              alt={temple.name}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+          ) : (
+            <div className="flex h-full items-center justify-center bg-secondary text-4xl">🛕</div>
+          )}
+        </div>
+        <CardContent className="p-4">
+          <h3 className="font-display text-lg font-semibold">{temple.name}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">📍 {temple.location}</p>
+          {temple.description && (
+            <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{temple.description}</p>
+          )}
+        </CardContent>
+      </Card>
+    </Link>
+  );
+}
