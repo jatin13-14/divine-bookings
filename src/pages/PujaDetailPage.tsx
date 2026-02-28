@@ -1,40 +1,15 @@
 import { useParams, Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Clock, MapPin, Star } from "lucide-react";
+import pujaImage from "@/assets/puja-thali.jpg";
+import { demoPujas } from "@/lib/demoData";
 
 export default function PujaDetailPage() {
   const { id } = useParams<{ id: string }>();
-
-  const { data: puja, isLoading } = useQuery({
-    queryKey: ["puja", id],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("pujas")
-        .select("*, temples(*)")
-        .eq("id", id!)
-        .single();
-      if (error) throw error;
-      return data;
-    },
-    enabled: !!id,
-  });
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1 container py-12">
-          <div className="h-80 rounded-lg bg-muted animate-pulse" />
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  const puja = demoPujas.find((p) => p.id === id);
 
   if (!puja) {
     return (
@@ -61,11 +36,7 @@ export default function PujaDetailPage() {
             {/* Image */}
             <div className="lg:col-span-3">
               <div className="aspect-[16/10] overflow-hidden rounded-xl bg-muted">
-                {puja.image_url ? (
-                  <img src={puja.image_url} alt={puja.name} className="h-full w-full object-cover" />
-                ) : (
-                  <div className="flex h-full items-center justify-center text-6xl">🙏</div>
-                )}
+                <img src={pujaImage} alt={puja.name} className="h-full w-full object-cover" />
               </div>
             </div>
 

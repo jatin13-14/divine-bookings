@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { demoPujas } from "@/lib/demoData";
 
 interface Participant {
   name: string;
@@ -40,19 +39,7 @@ export default function BookingPage() {
 
   const [participants, setParticipants] = useState<Participant[]>([]);
 
-  const { data: puja } = useQuery({
-    queryKey: ["puja-booking", pujaId],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("pujas")
-        .select("*, temples(*)")
-        .eq("id", pujaId!)
-        .single();
-      if (error) throw error;
-      return data;
-    },
-    enabled: !!pujaId,
-  });
+  const puja = demoPujas.find((p) => p.id === pujaId);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -81,7 +68,12 @@ export default function BookingPage() {
 
     setLoading(true);
     try {
-      const { error } = await supabase.from("bookings").insert([{
+      const raw = localStorage.getItem("epuja_demo_bookings");
+      const existing = raw ? (JSON.parse(raw) as any[]) : [];
+      const bookingNumber = `EPJ-${String(Math.floor(Math.random() * 999999)).padStart(6, "0")}`;
+      const next = {
+        id: crypto.randomUUID(),
+        booking_number: bookingNumber,
         user_id: user.id,
         puja_id: puja.id,
         booking_date: formData.booking_date,
@@ -89,19 +81,23 @@ export default function BookingPage() {
         gotra: formData.gotra || null,
         nakshatra: formData.nakshatra || null,
         sankalp_text: formData.sankalp_text || null,
-        participants: participants.length > 0 ? JSON.parse(JSON.stringify(participants)) : null,
-        delivery_address: JSON.parse(JSON.stringify({
+        participants: participants.length > 0 ? participants : null,
+        delivery_address: {
           line: formData.address_line,
           city: formData.city,
           state: formData.state,
           pincode: formData.pincode,
           phone: formData.phone,
-        })),
-        payment_amount: puja.price,
+        },
         status: "pending",
         payment_status: "pending",
-      }]);
-      if (error) throw error;
+        payment_amount: puja.price,
+        video_link: null,
+        tracking_number: null,
+        pujas: { name: puja.name, deity: puja.deity, temples: { name: puja.temples?.name ?? "" } },
+        created_at: new Date().toISOString(),
+      };
+      localStorage.setItem("epuja_demo_bookings", JSON.stringify([next, ...existing]));
 
       toast({ title: "Booking Confirmed! 🙏", description: "Your puja has been booked. You'll receive a confirmation shortly." });
       navigate("/dashboard");
@@ -116,7 +112,13 @@ export default function BookingPage() {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-1 container py-12"><div className="h-40 rounded-lg bg-muted animate-pulse" /></main>
+        <main className="flex-1 container py-12 text-center">
+          <p className="text-4xl mb-4">🙏</p>
+          <h1 className="font-display text-2xl font-bold">Puja Not Found</h1>
+          <Button variant="outline" className="mt-4" asChild>
+            <Link to="/pujas">Back to All Pujas</Link>
+          </Button>
+        </main>
         <Footer />
       </div>
     );

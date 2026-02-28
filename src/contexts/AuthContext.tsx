@@ -1,10 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import type { User, Session } from "@supabase/supabase-js";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 interface AuthContextType {
-  user: User | null;
-  session: Session | null;
+  user: { id: string; email: string; fullName?: string } | null;
   loading: boolean;
   signUp: (email: string, password: string, fullName: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
@@ -13,51 +10,56 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const DEMO_EMAIL = "jatin@gmail.com";
+const DEMO_PASSWORD = "P@ssword@123";
+const DEMO_FULL_NAME = "Jatin";
+const STORAGE_KEY = "epuja_demo_auth";
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<AuthContextType["user"]>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as { email: string; fullName?: string } | null;
+        if (parsed?.email === DEMO_EMAIL) {
+          setUser({ id: "demo-jatin", email: parsed.email, fullName: parsed.fullName ?? DEMO_FULL_NAME });
+        }
+      }
+    } catch {
+      // ignore corrupt storage
+    } finally {
       setLoading(false);
-    });
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
+    }
   }, []);
 
   const signUp = async (email: string, password: string, fullName: string) => {
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { full_name: fullName },
-        emailRedirectTo: window.location.origin,
-      },
-    });
-    if (error) throw error;
+    void email;
+    void password;
+    void fullName;
+    throw new Error(`Demo mode: use ${DEMO_EMAIL} / ${DEMO_PASSWORD}`);
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) throw error;
+    if (email !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
+      throw new Error("Invalid demo credentials");
+    }
+    const nextUser = { id: "demo-jatin", email: DEMO_EMAIL, fullName: DEMO_FULL_NAME };
+    setUser(nextUser);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ email: nextUser.email, fullName: nextUser.fullName }));
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    setUser(null);
+    localStorage.removeItem(STORAGE_KEY);
   };
 
+  const value = useMemo<AuthContextType>(() => ({ user, loading, signUp, signIn, signOut }), [user, loading]);
+
   return (
-    <AuthContext.Provider value={{ user, session, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import type { Tables } from "@/integrations/supabase/types";
+import pujaImage from "@/assets/puja-thali.jpg";
 
 interface PujaCardProps {
-  puja: Tables<"pujas"> & { temples?: Tables<"temples"> | null };
+  puja: {
+    id: string;
+    name: string;
+    deity: string;
+    price: number;
+    is_featured?: boolean;
+    category?: string | null;
+    temples?: { name: string; location: string } | null;
+  };
 }
 
 export default function PujaCard({ puja }: PujaCardProps) {
@@ -12,16 +20,12 @@ export default function PujaCard({ puja }: PujaCardProps) {
     <Link to={`/pujas/${puja.id}`}>
       <Card className="group overflow-hidden border-border shadow-card hover:shadow-warm transition-all duration-300">
         <div className="aspect-[4/3] overflow-hidden bg-muted">
-          {puja.image_url ? (
-            <img
-              src={puja.image_url}
-              alt={puja.name}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center bg-secondary text-4xl">🙏</div>
-          )}
+          <img
+            src={pujaImage}
+            alt={puja.name}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
         </div>
         <CardContent className="p-4">
           <div className="flex items-start justify-between gap-2">

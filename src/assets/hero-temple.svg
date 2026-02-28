@@ -1,0 +1,51 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Temple illustration placeholder</title>
+  <desc id="desc">Warm saffron gradient background with a simple temple silhouette and diya.</desc>
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="50%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#f9fafb" />
+    </linearGradient>
+    <linearGradient id="diyaGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bgGrad)" />
+
+  <!-- subtle rays -->
+  <g opacity="0.35">
+    <circle cx="800" cy="380" r="260" fill="none" stroke="#fde68a" stroke-width="2" />
+    <circle cx="800" cy="380" r="340" fill="none" stroke="#fef3c7" stroke-width="1.5" />
+  </g>
+
+  <!-- temple base -->
+  <g transform="translate(0,80)" fill="#fefce8">
+    <rect x="520" y="480" width="560" height="80" rx="8" />
+    <rect x="560" y="420" width="480" height="70" rx="8" />
+    <rect x="600" y="360" width="400" height="70" rx="8" />
+
+    <!-- pillars -->
+    <rect x="610" y="360" width="30" height="200" rx="6" fill="#facc15" />
+    <rect x="680" y="360" width="30" height="200" rx="6" fill="#facc15" />
+    <rect x="890" y="360" width="30" height="200" rx="6" fill="#facc15" />
+    <rect x="960" y="360" width="30" height="200" rx="6" fill="#facc15" />
+
+    <!-- shikhara -->
+    <path d="M800 210 L720 340 L880 340 Z" fill="#f97316" />
+    <circle cx="800" cy="200" r="10" fill="#facc15" />
+  </g>
+
+  <!-- diya in foreground -->
+  <g transform="translate(0,80)">
+    <ellipse cx="800" cy="620" rx="110" ry="26" fill="#451a03" opacity="0.35" />
+    <path d="M710 560 Q800 620 890 560 Q880 610 800 630 Q720 610 710 560 Z" fill="url(#diyaGrad)" />
+    <path d="M800 520 C780 540 785 560 800 575 C815 560 820 540 800 520 Z" fill="#f97316" />
+    <path d="M800 520 C792 528 794 540 800 546 C806 540 808 528 800 520 Z" fill="#fef3c7" />
+  </g>
+
+  <!-- soft noise-like overlay -->
+  <rect width="1600" height="900" fill="#000" opacity="0.04" />
+</svg>
+

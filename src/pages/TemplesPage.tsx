@@ -1,18 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TempleCard from "@/components/TempleCard";
+import { demoTemples } from "@/lib/demoData";
 
 export default function TemplesPage() {
-  const { data: temples, isLoading } = useQuery({
-    queryKey: ["temples"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("temples").select("*").eq("is_active", true);
-      if (error) throw error;
-      return data;
-    },
-  });
+  const temples = demoTemples;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -25,11 +17,7 @@ export default function TemplesPage() {
           </div>
         </section>
         <section className="container py-8">
-          {isLoading ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[1,2,3].map(i => <div key={i} className="h-60 rounded-lg bg-muted animate-pulse" />)}
-            </div>
-          ) : temples && temples.length > 0 ? (
+          {temples.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {temples.map((t) => <TempleCard key={t.id} temple={t} />)}
             </div>

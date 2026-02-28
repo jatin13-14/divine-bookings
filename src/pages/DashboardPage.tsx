@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link, Navigate } from "react-router-dom";
+import pujaImage from "@/assets/puja-thali.jpg";
 
 const statusColors: Record<string, string> = {
   pending: "bg-gold/20 text-temple-brown",
@@ -19,22 +18,16 @@ const statusColors: Record<string, string> = {
 export default function DashboardPage() {
   const { user, loading: authLoading } = useAuth();
 
-  const { data: bookings, isLoading } = useQuery({
-    queryKey: ["my-bookings", user?.id],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("bookings")
-        .select("*, pujas(name, deity, image_url, temples(name))")
-        .eq("user_id", user!.id)
-        .order("created_at", { ascending: false });
-      if (error) throw error;
-      return data;
-    },
-    enabled: !!user,
-  });
-
   if (authLoading) return null;
   if (!user) return <Navigate to="/auth" />;
+
+  let bookings: any[] = [];
+  try {
+    const raw = localStorage.getItem("epuja_demo_bookings");
+    bookings = raw ? (JSON.parse(raw) as any[]) : [];
+  } catch {
+    bookings = [];
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -45,22 +38,14 @@ export default function DashboardPage() {
           <p className="mt-1 text-muted-foreground">Track your puja bookings and view details</p>
         </div>
 
-        {isLoading ? (
-          <div className="space-y-4">
-            {[1,2,3].map(i => <div key={i} className="h-24 rounded-lg bg-muted animate-pulse" />)}
-          </div>
-        ) : bookings && bookings.length > 0 ? (
+        {bookings.length > 0 ? (
           <div className="space-y-4">
             {bookings.map((booking) => (
               <Card key={booking.id} className="shadow-card">
                 <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5">
                   <div className="flex items-center gap-4">
                     <div className="h-14 w-14 rounded-lg overflow-hidden bg-muted shrink-0">
-                      {booking.pujas?.image_url ? (
-                        <img src={booking.pujas.image_url} alt="" className="h-full w-full object-cover" />
-                      ) : (
-                        <div className="flex h-full items-center justify-center text-2xl">🙏</div>
-                      )}
+                      <img src={pujaImage} alt="" className="h-full w-full object-cover" />
                     </div>
                     <div>
                       <p className="font-display font-semibold">{booking.pujas?.name ?? "Puja"}</p>

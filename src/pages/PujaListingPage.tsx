@@ -1,9 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PujaCard from "@/components/PujaCard";
+import { demoPujas } from "@/lib/demoData";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
@@ -13,23 +12,12 @@ export default function PujaListingPage() {
   const [deity, setDeity] = useState<string>("all");
   const [category, setCategory] = useState<string>("all");
 
-  const { data: pujas, isLoading } = useQuery({
-    queryKey: ["pujas"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("pujas")
-        .select("*, temples(*)")
-        .eq("is_active", true)
-        .order("is_featured", { ascending: false });
-      if (error) throw error;
-      return data;
-    },
-  });
+  const pujas = demoPujas;
 
-  const deities = [...new Set(pujas?.map((p) => p.deity) ?? [])];
-  const categories = [...new Set(pujas?.map((p) => p.category).filter(Boolean) ?? [])];
+  const deities = [...new Set(pujas.map((p) => p.deity))];
+  const categories = [...new Set(pujas.map((p) => p.category).filter(Boolean))];
 
-  const filtered = pujas?.filter((p) => {
+  const filtered = pujas.filter((p) => {
     const matchSearch = p.name.toLowerCase().includes(search.toLowerCase()) || p.deity.toLowerCase().includes(search.toLowerCase());
     const matchDeity = deity === "all" || p.deity === deity;
     const matchCategory = category === "all" || p.category === category;
@@ -76,11 +64,7 @@ export default function PujaListingPage() {
           </div>
         </section>
         <section className="container py-8">
-          {isLoading ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[1,2,3].map(i => <div key={i} className="h-72 rounded-lg bg-muted animate-pulse" />)}
-            </div>
-          ) : filtered && filtered.length > 0 ? (
+          {filtered.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((puja) => <PujaCard key={puja.id} puja={puja} />)}
             </div>

@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
-import type { Tables } from "@/integrations/supabase/types";
+import heroImage from "@/assets/hero-temple.jpg";
 
 interface TempleCardProps {
-  temple: Tables<"temples">;
+  temple: {
+    id: string;
+    name: string;
+    location: string;
+    description?: string | null;
+  };
 }
 
 export default function TempleCard({ temple }: TempleCardProps) {
@@ -11,16 +16,12 @@ export default function TempleCard({ temple }: TempleCardProps) {
     <Link to={`/temples/${temple.id}`}>
       <Card className="group overflow-hidden border-border shadow-card hover:shadow-warm transition-all duration-300">
         <div className="aspect-[16/9] overflow-hidden bg-muted">
-          {temple.image_url ? (
-            <img
-              src={temple.image_url}
-              alt={temple.name}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center bg-secondary text-4xl">🛕</div>
-          )}
+          <img
+            src={heroImage}
+            alt={temple.name}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
         </div>
         <CardContent className="p-4">
           <h3 className="font-display text-lg font-semibold">{temple.name}</h3>
