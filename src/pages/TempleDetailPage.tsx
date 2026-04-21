@@ -32,14 +32,20 @@ export default function TempleDetailPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
-        {/* Hero */}
-        <div className="relative h-64 md:h-80 overflow-hidden bg-muted">
-          <img src={heroImage} alt={temple.name} className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-hero" />
-          <div className="absolute bottom-0 left-0 right-0 p-6">
+        {/* Hero — 3D temple scene */}
+        <div className="relative h-72 md:h-96 overflow-hidden bg-[#1a0a04]">
+          <TempleScene />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.65)_100%)]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 pointer-events-none">
             <div className="container">
-              <h1 className="font-display text-3xl font-bold text-primary-foreground md:text-4xl">{temple.name}</h1>
-              <div className="mt-2 flex items-center gap-2 text-primary-foreground/80">
+              <h1
+                className="font-display text-3xl font-bold text-primary-foreground md:text-5xl"
+                style={{ textShadow: "0 4px 18px rgba(0,0,0,0.6)" }}
+              >
+                {temple.name}
+              </h1>
+              <div className="mt-2 flex items-center gap-2 text-primary-foreground/85">
                 <MapPin className="h-4 w-4" />
                 <span>{temple.location}</span>
               </div>
