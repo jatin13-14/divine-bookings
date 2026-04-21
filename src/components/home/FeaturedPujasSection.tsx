@@ -24,19 +24,27 @@ export function FeaturedPujasSection(props: {
 }) {
   const { pujas, isLoading, isError } = props;
   return (
-    <section id="special-pujas" className="py-16 md:py-20">
+    <section id="special-pujas" className="py-24">
       <div className="container">
-        <div className="mx-auto mb-10 max-w-2xl text-center">
-          <h2 className="font-display text-3xl font-bold md:text-4xl">Special Pujas</h2>
-          <p className="mt-2 text-muted-foreground">
-            Begin your journey with ceremonies chosen for peace, protection, and prosperity.
+        <div className="mb-14 flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <span className="label-mono-sm text-foreground/40">Index · 03 / Pujas</span>
+            <h2 className="mt-3 font-display text-4xl font-light leading-tight md:text-6xl">
+              Special
+              <br />
+              <span className="text-gradient-iridescent italic">ceremonies</span>.
+            </h2>
+          </div>
+          <p className="max-w-sm text-sm text-foreground/60">
+            Begin your journey with ceremonies chosen for
+            peace, protection, and prosperity.
           </p>
         </div>
 
         {isLoading && (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="overflow-hidden rounded-lg border border-border shadow-card">
+              <div key={i} className="overflow-hidden rounded-lg border border-border/60 bg-card/40">
                 <Skeleton className="aspect-[4/3] w-full rounded-none" />
                 <div className="p-4">
                   <Skeleton className="h-5 w-3/4" />
@@ -49,22 +57,22 @@ export function FeaturedPujasSection(props: {
         )}
 
         {!isLoading && isError && (
-          <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-card">
-            <h3 className="font-display text-lg font-semibold">Couldn’t load featured pujas</h3>
-            <p className="mt-2 text-sm text-muted-foreground">Please try again in a moment.</p>
-            <Button className="mt-5" variant="saffron" asChild>
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-10 text-center backdrop-blur-md">
+            <h3 className="font-display text-xl font-light">Couldn't load featured pujas</h3>
+            <p className="mt-2 text-sm text-foreground/60">Please try again in a moment.</p>
+            <Button className="mt-6" variant="hero" asChild>
               <Link to="/pujas">Browse all pujas</Link>
             </Button>
           </div>
         )}
 
         {!isLoading && !isError && (!pujas || pujas.length === 0) && (
-          <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-card">
-            <h3 className="font-display text-lg font-semibold">No featured pujas yet</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Add some pujas in Supabase and mark them as featured to display here.
+          <div className="rounded-2xl border border-border/60 bg-card/40 p-10 text-center backdrop-blur-md">
+            <h3 className="font-display text-xl font-light">No featured pujas yet</h3>
+            <p className="mt-2 text-sm text-foreground/60">
+              Mark some pujas as featured to display here.
             </p>
-            <Button className="mt-5" variant="outline" asChild>
+            <Button className="mt-6" variant="outline" asChild>
               <Link to="/pujas">View all pujas</Link>
             </Button>
           </div>
@@ -77,7 +85,7 @@ export function FeaturedPujasSection(props: {
                 <PujaCard key={puja.id} puja={puja} />
               ))}
             </div>
-            <div className="mt-10 text-center">
+            <div className="mt-12 flex justify-center">
               <Button variant="outline" size="lg" asChild>
                 <Link to="/pujas">View all pujas →</Link>
               </Button>
@@ -88,4 +96,3 @@ export function FeaturedPujasSection(props: {
     </section>
   );
 }
-

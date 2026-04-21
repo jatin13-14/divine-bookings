@@ -4,37 +4,42 @@ import { HeroScene } from "@/components/three/HeroScene";
 
 export function HeroSection() {
   return (
-    <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden bg-[#1a0a04]">
-      {/* Real WebGL 3D scene */}
+    <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden bg-[#04060d]">
+      {/* WebGL scene */}
       <div className="absolute inset-0">
         <HeroScene />
       </div>
 
-      {/* Vignette + bottom fade so text stays readable */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.55)_100%)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
+      {/* Cosmic vignette */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(0,0,0,0.7)_100%)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-background" />
+
+      {/* Top + bottom microtype frame */}
+      <div className="pointer-events-none absolute inset-x-0 top-24 z-10 mx-auto flex max-w-7xl items-center justify-between px-6 text-foreground/60">
+        <span className="label-mono-sm">N · 28.6° E · 77.2°</span>
+        <span className="label-mono-sm">Sanātana · MMXXVI</span>
+      </div>
 
       <div className="pointer-events-none relative z-10 container px-4 py-16">
-        <div className="mx-auto max-w-4xl text-center animate-fade-in">
-          <p className="pointer-events-auto mx-auto inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 bg-black/40 px-4 py-1.5 text-xs font-medium tracking-wide text-primary-foreground/95 backdrop-blur-md shadow-[0_4px_24px_rgba(255,160,80,0.25)]">
-            <span className="h-2 w-2 rounded-full bg-gold animate-diya-glow" />
-            Book temple pujas in your name, from anywhere
+        <div className="mx-auto max-w-5xl text-center animate-fade-in">
+          <p className="pointer-events-auto mx-auto inline-flex items-center gap-2.5 rounded-full border border-foreground/15 bg-foreground/[0.04] px-4 py-1.5 backdrop-blur-md label-mono-sm text-foreground/80">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary pulse-dot" />
+            <span>Live · Temple bookings open</span>
           </p>
 
-          <h1
-            className="mt-5 font-display text-4xl font-bold leading-tight text-primary-foreground md:text-6xl lg:text-7xl"
-            style={{ textShadow: "0 6px 30px rgba(0,0,0,0.6), 0 2px 6px rgba(255,140,40,0.4)" }}
-          >
-            Divine Blessings,
+          <h1 className="mt-6 font-display text-5xl font-light leading-[0.95] text-foreground md:text-7xl lg:text-[8rem] text-shadow-cosmic">
+            Divine Blessings
             <br />
-            <span className="text-gradient-saffron">Delivered to You</span>
+            <span className="text-gradient-iridescent font-medium italic">delivered</span>
+            <span className="text-foreground/90"> to you.</span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-base text-primary-foreground/90 md:text-xl" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.55)" }}>
-            Choose authentic pujas performed at sacred temples across India. Get updates, video proof, and prasad delivery.
+          <p className="mx-auto mt-7 max-w-xl text-base text-foreground/70 md:text-lg text-shadow-cosmic">
+            Authentic pujas performed at sacred temples across India.
+            Updates, video proof, prasad — wherever you are.
           </p>
 
-          <div className="pointer-events-auto mt-9 flex flex-wrap items-center justify-center gap-3">
+          <div className="pointer-events-auto mt-10 flex flex-wrap items-center justify-center gap-3">
             <Button variant="hero" size="lg" asChild>
               <Link to="/pujas">Explore Pujas</Link>
             </Button>
@@ -43,21 +48,30 @@ export function HeroSection() {
             </Button>
           </div>
 
-          <div className="pointer-events-auto mt-10 grid grid-cols-3 gap-3 rounded-2xl border border-primary-foreground/20 bg-black/40 p-4 text-primary-foreground/95 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.7)] backdrop-blur-md sm:gap-6 sm:p-6">
-            <div className="text-center">
-              <div className="font-display text-2xl font-bold sm:text-3xl">100+</div>
-              <div className="mt-1 text-xs text-primary-foreground/80 sm:text-sm">Temple partners</div>
+          {/* Stats — minimal mono frame */}
+          <div className="pointer-events-auto mt-14 mx-auto flex max-w-2xl items-center justify-between border-t border-foreground/10 pt-6 text-foreground">
+            <div className="text-left">
+              <div className="font-display text-3xl font-light">100+</div>
+              <div className="mt-1 label-mono-sm text-foreground/60">Temple partners</div>
             </div>
+            <div className="h-10 w-px bg-foreground/10" />
             <div className="text-center">
-              <div className="font-display text-2xl font-bold sm:text-3xl">4.5★</div>
-              <div className="mt-1 text-xs text-primary-foreground/80 sm:text-sm">Devotee ratings</div>
+              <div className="font-display text-3xl font-light">4.5<span className="text-primary">★</span></div>
+              <div className="mt-1 label-mono-sm text-foreground/60">Devotee rating</div>
             </div>
-            <div className="text-center">
-              <div className="font-display text-2xl font-bold sm:text-3xl">30+</div>
-              <div className="mt-1 text-xs text-primary-foreground/80 sm:text-sm">Countries served</div>
+            <div className="h-10 w-px bg-foreground/10" />
+            <div className="text-right">
+              <div className="font-display text-3xl font-light">30+</div>
+              <div className="mt-1 label-mono-sm text-foreground/60">Countries served</div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="pointer-events-none absolute bottom-8 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-2 text-foreground/50">
+        <span className="label-mono-sm">Scroll</span>
+        <div className="h-10 w-px bg-gradient-to-b from-foreground/40 to-transparent" />
       </div>
     </section>
   );
