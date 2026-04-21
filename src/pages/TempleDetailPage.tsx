@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import PujaCard from "@/components/PujaCard";
 import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
-import heroImage from "@/assets/hero-temple.jpg";
+import { TempleScene } from "@/components/three/TempleScene";
 import { demoPujas, demoTemples } from "@/lib/demoData";
 
 export default function TempleDetailPage() {
