@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,91 +6,92 @@
 
 @layer base {
   :root {
-    --background: 40 33% 97%;
-    --foreground: 20 20% 15%;
+    /* === Active Theory inspired: deep cosmic navy/black with iridescent + warm devotional accents === */
+    --background: 222 45% 4%;
+    --foreground: 40 25% 92%;
 
-    --card: 40 30% 99%;
-    --card-foreground: 20 20% 15%;
+    --card: 222 40% 7%;
+    --card-foreground: 40 25% 92%;
 
-    --popover: 40 30% 99%;
-    --popover-foreground: 20 20% 15%;
+    --popover: 222 45% 6%;
+    --popover-foreground: 40 25% 92%;
 
-    --primary: 30 85% 52%;
-    --primary-foreground: 40 30% 99%;
+    /* Primary stays warm saffron — devotional soul */
+    --primary: 30 90% 58%;
+    --primary-foreground: 222 45% 4%;
 
-    --secondary: 40 30% 93%;
-    --secondary-foreground: 20 20% 20%;
+    --secondary: 222 30% 12%;
+    --secondary-foreground: 40 25% 92%;
 
-    --muted: 40 20% 94%;
-    --muted-foreground: 20 10% 45%;
+    --muted: 222 25% 11%;
+    --muted-foreground: 220 12% 62%;
 
-    --accent: 0 65% 42%;
-    --accent-foreground: 40 30% 99%;
+    /* Iridescent cyan accent — Active Theory signature */
+    --accent: 195 90% 60%;
+    --accent-foreground: 222 45% 4%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 35 25% 88%;
-    --input: 35 25% 88%;
-    --ring: 30 85% 52%;
+    --border: 222 25% 14%;
+    --input: 222 25% 14%;
+    --ring: 30 90% 58%;
 
-    --radius: 0.625rem;
+    --radius: 0.5rem;
 
-    --sidebar-background: 35 30% 96%;
-    --sidebar-foreground: 20 20% 20%;
-    --sidebar-primary: 30 85% 52%;
-    --sidebar-primary-foreground: 40 30% 99%;
-    --sidebar-accent: 35 25% 92%;
-    --sidebar-accent-foreground: 20 20% 20%;
-    --sidebar-border: 35 25% 88%;
-    --sidebar-ring: 30 85% 52%;
+    --sidebar-background: 222 40% 6%;
+    --sidebar-foreground: 40 25% 92%;
+    --sidebar-primary: 30 90% 58%;
+    --sidebar-primary-foreground: 222 45% 4%;
+    --sidebar-accent: 222 25% 12%;
+    --sidebar-accent-foreground: 40 25% 92%;
+    --sidebar-border: 222 25% 14%;
+    --sidebar-ring: 30 90% 58%;
 
-    /* Custom spiritual tokens */
-    --saffron: 30 85% 52%;
-    --saffron-light: 35 80% 65%;
-    --saffron-dark: 25 85% 42%;
-    --crimson: 0 65% 42%;
-    --crimson-light: 0 55% 55%;
-    --gold: 43 80% 55%;
-    --gold-light: 45 75% 75%;
-    --ivory: 40 33% 97%;
-    --temple-brown: 25 35% 30%;
+    /* Spiritual + iridescent tokens */
+    --saffron: 30 90% 58%;
+    --saffron-light: 38 95% 68%;
+    --saffron-dark: 22 85% 48%;
+    --crimson: 0 70% 50%;
+    --crimson-light: 0 65% 62%;
+    --gold: 43 90% 60%;
+    --gold-light: 45 85% 78%;
+    --ivory: 40 30% 92%;
+    --temple-brown: 25 35% 25%;
 
-    --gradient-saffron: linear-gradient(135deg, hsl(30 85% 52%), hsl(43 80% 55%));
-    --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
-    --gradient-warm: linear-gradient(135deg, hsl(40 33% 97%), hsl(35 30% 93%));
-    --shadow-warm: 0 4px 20px -4px hsl(30 85% 52% / 0.2);
-    --shadow-card: 0 2px 12px -2px hsl(20 20% 15% / 0.08);
+    /* Iridescent palette */
+    --iridescent-1: 195 90% 60%;  /* cyan */
+    --iridescent-2: 280 80% 65%;  /* violet */
+    --iridescent-3: 320 75% 60%;  /* magenta */
+    --iridescent-4: 30 95% 60%;   /* saffron */
+
+    --gradient-saffron: linear-gradient(135deg, hsl(30 90% 58%), hsl(43 90% 60%));
+    --gradient-iridescent: linear-gradient(115deg, hsl(195 90% 60%), hsl(280 80% 65%) 40%, hsl(320 75% 60%) 65%, hsl(30 95% 60%));
+    --gradient-cosmic: linear-gradient(180deg, hsl(222 45% 4%) 0%, hsl(222 50% 2%) 100%);
+    --shadow-glow-saffron: 0 0 60px -10px hsl(30 90% 58% / 0.55);
+    --shadow-glow-cyan: 0 0 60px -10px hsl(195 90% 60% / 0.5);
   }
 
   .dark {
-    --background: 20 20% 8%;
-    --foreground: 40 20% 92%;
-    --card: 20 18% 12%;
-    --card-foreground: 40 20% 92%;
-    --popover: 20 18% 12%;
-    --popover-foreground: 40 20% 92%;
-    --primary: 30 85% 55%;
-    --primary-foreground: 20 20% 8%;
-    --secondary: 20 15% 18%;
-    --secondary-foreground: 40 20% 92%;
-    --muted: 20 15% 18%;
-    --muted-foreground: 35 15% 55%;
-    --accent: 0 55% 50%;
-    --accent-foreground: 40 20% 92%;
-    --destructive: 0 62% 30%;
+    --background: 222 45% 4%;
+    --foreground: 40 25% 92%;
+    --card: 222 40% 7%;
+    --card-foreground: 40 25% 92%;
+    --popover: 222 45% 6%;
+    --popover-foreground: 40 25% 92%;
+    --primary: 30 90% 58%;
+    --primary-foreground: 222 45% 4%;
+    --secondary: 222 30% 12%;
+    --secondary-foreground: 40 25% 92%;
+    --muted: 222 25% 11%;
+    --muted-foreground: 220 12% 62%;
+    --accent: 195 90% 60%;
+    --accent-foreground: 222 45% 4%;
+    --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 98%;
-    --border: 20 15% 22%;
-    --input: 20 15% 22%;
-    --ring: 30 85% 55%;
-    --sidebar-background: 20 18% 10%;
-    --sidebar-foreground: 40 20% 92%;
-    --sidebar-primary: 30 85% 55%;
-    --sidebar-primary-foreground: 20 20% 8%;
-    --sidebar-accent: 20 15% 16%;
-    --sidebar-accent-foreground: 40 20% 92%;
-    --sidebar-border: 20 15% 22%;
-    --sidebar-ring: 30 85% 55%;
+    --border: 222 25% 14%;
+    --input: 222 25% 14%;
+    --ring: 30 90% 58%;
   }
 }
 
@@ -99,82 +100,175 @@
     @apply border-border;
   }
 
+  html {
+    color-scheme: dark;
+  }
+
   body {
     @apply bg-background text-foreground font-body antialiased;
+    background:
+      radial-gradient(ellipse at 20% 0%, hsl(222 50% 8%) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, hsl(280 30% 8%) 0%, transparent 50%),
+      hsl(var(--background));
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+    @apply font-display tracking-tight;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.4);
+    color: hsl(var(--foreground));
   }
 }
 
 @layer utilities {
+  /* === Iridescent / metallic text === */
   .text-gradient-saffron {
-    background: linear-gradient(135deg, hsl(30 85% 52%), hsl(43 80% 55%));
+    background: linear-gradient(135deg, hsl(30 90% 58%), hsl(43 90% 70%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .bg-gradient-saffron {
-    background: linear-gradient(135deg, hsl(30 85% 52%), hsl(43 80% 55%));
+  .text-gradient-iridescent {
+    background: var(--gradient-iridescent);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer-text 8s ease-in-out infinite;
   }
 
-  .bg-gradient-hero {
-    background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
+  @keyframes shimmer-text {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
-  .bg-gradient-warm {
-    background: linear-gradient(135deg, hsl(40 33% 97%), hsl(35 30% 93%));
+  .bg-gradient-saffron { background: var(--gradient-saffron); }
+  .bg-gradient-iridescent { background: var(--gradient-iridescent); }
+  .bg-gradient-cosmic { background: var(--gradient-cosmic); }
+
+  .shadow-glow-saffron { box-shadow: var(--shadow-glow-saffron); }
+  .shadow-glow-cyan { box-shadow: var(--shadow-glow-cyan); }
+
+  /* === Mono microtype label (Active Theory signature) === */
+  .label-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.7rem;
+    font-weight: 500;
   }
 
-  .shadow-warm {
-    box-shadow: 0 4px 20px -4px hsl(30 85% 52% / 0.2);
+  .label-mono-sm {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.625rem;
+    font-weight: 500;
   }
 
-  .shadow-card {
-    box-shadow: 0 2px 12px -2px hsl(20 20% 15% / 0.08);
+  /* === Glass surfaces — dark frosted with iridescent edge === */
+  .glass-panel {
+    background: linear-gradient(180deg, hsl(222 35% 9% / 0.7) 0%, hsl(222 40% 6% / 0.6) 100%);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid hsl(220 30% 20% / 0.6);
+    box-shadow:
+      0 1px 0 hsl(220 30% 30% / 0.4) inset,
+      0 30px 80px -30px hsl(222 80% 2% / 0.9),
+      0 0 0 1px hsl(195 90% 60% / 0.05);
   }
 
-  /* === 3D depth utilities === */
+  .glass-panel-hover {
+    transition: border-color 400ms, box-shadow 400ms, transform 400ms;
+  }
+  .glass-panel-hover:hover {
+    border-color: hsl(30 90% 58% / 0.45);
+    box-shadow:
+      0 1px 0 hsl(30 90% 58% / 0.25) inset,
+      0 30px 80px -20px hsl(222 80% 2% / 0.95),
+      0 0 60px -10px hsl(30 90% 58% / 0.35);
+    transform: translateY(-3px);
+  }
+
+  /* Iridescent border ring (animated) */
+  .iridescent-border {
+    position: relative;
+    background-clip: padding-box;
+  }
+  .iridescent-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-iridescent);
+    background-size: 300% 100%;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: iridescent-shift 6s linear infinite;
+  }
+  @keyframes iridescent-shift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+
+  /* Perspective + 3D depth helpers */
   .perspective-1200 { perspective: 1200px; }
   .preserve-3d { transform-style: preserve-3d; }
 
-  /* Extruded "carved stone" surface, like a temple bas-relief */
-  .surface-3d {
-    background:
-      linear-gradient(180deg, hsl(35 35% 98%) 0%, hsl(35 25% 92%) 100%);
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.9) inset,
-      0 -2px 0 rgba(160,100,40,0.12) inset,
-      0 22px 40px -22px rgba(120,60,10,0.45),
-      0 8px 20px -10px rgba(217,122,44,0.25);
-    border: 1px solid hsl(35 30% 86%);
-  }
-
-  /* Saffron extruded panel (e.g. CTA, badges) */
-  .surface-3d-saffron {
-    background: linear-gradient(180deg, hsl(35 90% 60%) 0%, hsl(25 85% 46%) 100%);
-    box-shadow:
-      0 1px 0 rgba(255,220,150,0.6) inset,
-      0 -3px 0 rgba(120,50,5,0.45) inset,
-      0 18px 40px -16px rgba(180,80,15,0.55);
-    color: hsl(40 30% 99%);
-  }
-
-  /* Floating hover lift (combine with translateZ) */
+  /* Floating hover lift */
   .lift-3d {
-    transition: transform 300ms cubic-bezier(.2,.8,.2,1), box-shadow 300ms;
+    transition: transform 350ms cubic-bezier(.2,.8,.2,1), box-shadow 350ms;
   }
   .lift-3d:hover {
     transform: translateY(-4px) translateZ(0);
-    box-shadow: 0 26px 50px -22px rgba(120,60,10,0.45);
   }
 
-  /* Glow ring pulse */
-  @keyframes ring-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255,170,80,0.55), 0 0 30px rgba(255,170,80,0.35); }
-    50% { box-shadow: 0 0 0 10px rgba(255,170,80,0), 0 0 50px rgba(255,170,80,0.55); }
+  /* Cosmic grid background (subtle) */
+  .grid-cosmic {
+    background-image:
+      linear-gradient(hsl(220 30% 18% / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(220 30% 18% / 0.35) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
   }
-  .ring-glow { animation: ring-pulse 2.6s ease-in-out infinite; }
+
+  /* Marquee divider line */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(220 30% 30% / 0.6) 20%, hsl(220 30% 30% / 0.6) 80%, transparent);
+  }
+
+  /* Glow pulse for badge dots */
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 hsl(30 90% 58% / 0.7), 0 0 18px hsl(30 90% 58% / 0.5); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px hsl(30 90% 58% / 0), 0 0 24px hsl(30 90% 58% / 0.7); }
+  }
+  .pulse-dot { animation: pulse-dot 2.4s ease-in-out infinite; }
+
+  /* Subtle text shadow for over-3D copy */
+  .text-shadow-cosmic {
+    text-shadow: 0 4px 24px hsl(222 80% 2% / 0.9), 0 1px 4px hsl(222 80% 2% / 0.7);
+  }
+
+  /* Diya glow keyframe (kept for badge) */
+  @keyframes diya-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  .animate-diya-glow { animation: diya-glow 2s ease-in-out infinite; }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in { animation: fade-in 0.7s ease-out forwards; }
 }

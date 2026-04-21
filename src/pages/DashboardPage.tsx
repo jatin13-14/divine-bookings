@@ -32,7 +32,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 container py-8">
+      <main className="flex-1 pt-24 container py-8">
         <div className="mb-8">
           <h1 className="font-display text-3xl font-bold">My Bookings</h1>
           <p className="mt-1 text-muted-foreground">Track your puja bookings and view details</p>

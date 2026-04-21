@@ -47,7 +47,7 @@ export default function AuthPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 flex items-center justify-center py-12">
+      <main className="flex-1 pt-24 flex items-center justify-center py-12">
         <Card className="w-full max-w-md mx-4 shadow-card">
           <CardHeader className="text-center">
             <span className="text-4xl mb-2 block">🪔</span>

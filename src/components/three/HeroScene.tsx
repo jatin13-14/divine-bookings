@@ -6,46 +6,48 @@ import { OmSymbol } from "./objects/OmSymbol";
 import { Lotus } from "./objects/Lotus";
 import { Particles } from "./objects/Particles";
 
-/** Big immersive hero scene — temple at center, diyas, om, embers. */
+/** Cinematic Active Theory style hero — temple at center, drifting cosmic dust, iridescent rim. */
 export function HeroScene() {
   return (
     <Scene cameraPosition={[0, 2, 8]} fov={42} dpr={[1, 2]}>
-      {/* Ground reflection plane */}
+      {/* Reflective dark ground */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.6, 0]}>
-        <circleGeometry args={[10, 64]} />
-        <meshStandardMaterial color="#2a1408" roughness={0.5} metalness={0.3} />
+        <circleGeometry args={[14, 64]} />
+        <meshStandardMaterial color="#06080f" roughness={0.3} metalness={0.7} />
       </mesh>
 
-      {/* Subtle fog for depth */}
-      <fog attach="fog" args={["#1a0a04", 8, 22]} />
+      {/* Deep cosmic fog */}
+      <fog attach="fog" args={["#04060d", 7, 24]} />
 
-      <Float speed={1.2} rotationIntensity={0.15} floatIntensity={0.3}>
+      <Float speed={1.0} rotationIntensity={0.15} floatIntensity={0.35}>
         <Temple position={[0, -0.4, 0]} scale={0.95} />
       </Float>
 
-      {/* Side diyas */}
-      <Float speed={2} floatIntensity={0.4}>
+      {/* Glowing diyas at base */}
+      <Float speed={2} floatIntensity={0.3}>
         <Diya position={[-3.2, 0.4, 1.5]} scale={1.1} />
       </Float>
-      <Float speed={2.3} floatIntensity={0.4}>
+      <Float speed={2.3} floatIntensity={0.3}>
         <Diya position={[3.2, 0.4, 1.5]} scale={1.1} />
       </Float>
-      <Float speed={1.8} floatIntensity={0.5}>
+      <Float speed={1.8} floatIntensity={0.4}>
         <Diya position={[-1.8, 1.6, 3]} scale={0.7} />
       </Float>
-      <Float speed={1.6} floatIntensity={0.5}>
+      <Float speed={1.6} floatIntensity={0.4}>
         <Diya position={[2, 1.7, 3]} scale={0.7} />
       </Float>
 
-      {/* Floating om and lotus */}
+      {/* Floating chrome om and lotus */}
       <Float speed={1.4} rotationIntensity={0.4} floatIntensity={0.6}>
-        <OmSymbol position={[-4, 2.4, -1]} scale={0.7} color="#f0b950" />
+        <OmSymbol position={[-4.2, 2.6, -1.5]} scale={0.7} color="#ffb84d" />
       </Float>
       <Float speed={1.2} rotationIntensity={0.3} floatIntensity={0.6}>
-        <Lotus position={[4, 2.2, -1]} scale={0.9} />
+        <Lotus position={[4.2, 2.4, -1.5]} scale={0.9} />
       </Float>
 
-      <Particles count={150} spread={12} color="#ffc080" size={0.05} speed={0.15} />
+      {/* Two layered particle systems for cosmic depth */}
+      <Particles count={220} spread={16} color="#7fb8ff" size={0.035} speed={0.08} />
+      <Particles count={120} spread={10} color="#ffb060" size={0.045} speed={0.18} drift="up" />
     </Scene>
   );
 }

@@ -9,22 +9,26 @@ export default function TemplesPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1">
-        <section className="bg-gradient-warm py-12">
-          <div className="container">
-            <h1 className="font-display text-3xl font-bold md:text-4xl">Our Temple Partners</h1>
-            <p className="mt-2 text-muted-foreground">Sacred temples across India where your pujas are performed with devotion</p>
-          </div>
+      <main className="flex-1 pt-24">
+        <section className="container py-12">
+          <span className="label-mono-sm text-foreground/40">Index · Temples</span>
+          <h1 className="mt-3 font-display text-4xl font-light leading-tight md:text-6xl">
+            Our temple
+            <br />
+            <span className="text-gradient-iridescent italic">partners</span>.
+          </h1>
+          <p className="mt-4 max-w-md text-sm text-foreground/60">
+            Sacred temples across India where your pujas are performed with devotion.
+          </p>
         </section>
-        <section className="container py-8">
+        <section className="container pb-16">
           {temples.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {temples.map((t) => <TempleCard key={t.id} temple={t} />)}
             </div>
           ) : (
-            <div className="py-16 text-center text-muted-foreground">
-              <p className="text-4xl mb-2">🛕</p>
-              <p>No temples available yet. Check back soon!</p>
+            <div className="py-16 text-center text-foreground/60">
+              <p>No temples available yet. Check back soon.</p>
             </div>
           )}
         </section>
