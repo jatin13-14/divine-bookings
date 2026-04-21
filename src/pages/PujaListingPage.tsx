@@ -6,6 +6,7 @@ import { demoPujas } from "@/lib/demoData";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
+import { PujaScene } from "@/components/three/PujaScene";
 
 export default function PujaListingPage() {
   const [search, setSearch] = useState("");
@@ -28,10 +29,22 @@ export default function PujaListingPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
-        <section className="bg-gradient-warm py-12">
-          <div className="container">
-            <h1 className="font-display text-3xl font-bold md:text-4xl">All Pujas</h1>
-            <p className="mt-2 text-muted-foreground">Browse our collection of sacred ceremonies</p>
+        <section className="relative overflow-hidden bg-[#1a0a04] py-16">
+          <div className="absolute inset-0 opacity-90">
+            <PujaScene />
+          </div>
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(0,0,0,0.7)_100%)]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-background" />
+          <div className="container relative z-10">
+            <h1
+              className="font-display text-3xl font-bold text-primary-foreground md:text-5xl"
+              style={{ textShadow: "0 6px 20px rgba(0,0,0,0.55)" }}
+            >
+              All Pujas
+            </h1>
+            <p className="mt-2 text-primary-foreground/85" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
+              Browse our collection of sacred ceremonies
+            </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -39,11 +52,11 @@ export default function PujaListingPage() {
                   placeholder="Search pujas..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 bg-card/95 backdrop-blur"
                 />
               </div>
               <Select value={deity} onValueChange={setDeity}>
-                <SelectTrigger className="w-full sm:w-48">
+                <SelectTrigger className="w-full sm:w-48 bg-card/95 backdrop-blur">
                   <SelectValue placeholder="All Deities" />
                 </SelectTrigger>
                 <SelectContent>
@@ -52,7 +65,7 @@ export default function PujaListingPage() {
                 </SelectContent>
               </Select>
               <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger className="w-full sm:w-48">
+                <SelectTrigger className="w-full sm:w-48 bg-card/95 backdrop-blur">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
                 <SelectContent>

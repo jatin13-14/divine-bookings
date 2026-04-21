@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { Card3D } from "@/components/three/Card3D";
 
 const testimonials = [
   { name: "Achutam Nair", city: "Bangalore", text: "Smooth booking experience and timely updates. The puja video felt very reassuring." },
@@ -17,22 +18,25 @@ export function TestimonialsSection() {
 
         <div className="grid gap-6 md:grid-cols-3">
           {testimonials.map((t) => (
-            <div key={t.name} className="rounded-2xl border border-border bg-background p-6 shadow-card">
-              <div className="flex items-center gap-1 text-gold">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-gold text-gold" />
-                ))}
+            <Card3D key={t.name} intensity={9}>
+              <div className="h-full rounded-2xl surface-3d p-6 lift-3d">
+                <div className="flex items-center gap-1 text-gold" style={{ transform: "translateZ(20px)" }}>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-gold text-gold drop-shadow-[0_2px_4px_rgba(217,170,40,0.6)]" />
+                  ))}
+                </div>
+                <p className="mt-4 text-sm leading-relaxed text-foreground/90" style={{ transform: "translateZ(15px)" }}>
+                  “{t.text}”
+                </p>
+                <div className="mt-5 border-t border-border pt-4" style={{ transform: "translateZ(25px)" }}>
+                  <div className="font-display font-semibold">{t.name}</div>
+                  <div className="text-sm text-muted-foreground">{t.city}</div>
+                </div>
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-foreground/90">{t.text}</p>
-              <div className="mt-5 border-t border-border pt-4">
-                <div className="font-display font-semibold">{t.name}</div>
-                <div className="text-sm text-muted-foreground">{t.city}</div>
-              </div>
-            </div>
+            </Card3D>
           ))}
         </div>
       </div>
     </section>
   );
 }
-

@@ -3,8 +3,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Clock, MapPin, Star } from "lucide-react";
-import pujaImage from "@/assets/puja-thali.jpg";
+import { Clock, MapPin } from "lucide-react";
+import { PujaScene } from "@/components/three/PujaScene";
 import { demoPujas } from "@/lib/demoData";
 
 export default function PujaDetailPage() {
@@ -33,10 +33,10 @@ export default function PujaDetailPage() {
       <main className="flex-1">
         <div className="container py-8">
           <div className="grid gap-8 lg:grid-cols-5">
-            {/* Image */}
+            {/* 3D scene */}
             <div className="lg:col-span-3">
-              <div className="aspect-[16/10] overflow-hidden rounded-xl bg-muted">
-                <img src={pujaImage} alt={puja.name} className="h-full w-full object-cover" />
+              <div className="aspect-[16/10] overflow-hidden rounded-2xl bg-[#1a0a04] surface-3d shadow-[0_30px_60px_-20px_rgba(120,60,10,0.55)]">
+                <PujaScene interactive />
               </div>
             </div>
 
