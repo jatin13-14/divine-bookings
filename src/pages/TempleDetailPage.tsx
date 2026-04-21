@@ -16,10 +16,9 @@ export default function TempleDetailPage() {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-1 container py-12 text-center">
-          <p className="text-4xl mb-4">🛕</p>
-          <h1 className="font-display text-2xl font-bold">Temple Not Found</h1>
-          <Button variant="outline" className="mt-4" asChild>
+        <main className="flex-1 pt-32 container py-12 text-center">
+          <h1 className="font-display text-3xl font-light">Temple Not Found</h1>
+          <Button variant="outline" className="mt-6" asChild>
             <Link to="/temples">Back to Temples</Link>
           </Button>
         </main>
@@ -32,38 +31,38 @@ export default function TempleDetailPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
-        {/* Hero — 3D temple scene */}
-        <div className="relative h-72 md:h-96 overflow-hidden bg-[#1a0a04]">
+        {/* Cinematic 3D hero */}
+        <div className="relative h-[60vh] min-h-[420px] overflow-hidden bg-[#04060d]">
           <TempleScene />
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.65)_100%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(0,0,0,0.75)_100%)]" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background" />
           <div className="absolute bottom-0 left-0 right-0 p-6 pointer-events-none">
             <div className="container">
-              <h1
-                className="font-display text-3xl font-bold text-primary-foreground md:text-5xl"
-                style={{ textShadow: "0 4px 18px rgba(0,0,0,0.6)" }}
-              >
+              <span className="label-mono-sm text-foreground/60 text-shadow-cosmic">Index · Temple</span>
+              <h1 className="mt-2 font-display text-5xl font-light text-foreground md:text-7xl text-shadow-cosmic">
                 {temple.name}
               </h1>
-              <div className="mt-2 flex items-center gap-2 text-primary-foreground/85">
-                <MapPin className="h-4 w-4" />
+              <div className="mt-3 flex items-center gap-2 label-mono-sm text-foreground/70 text-shadow-cosmic">
+                <MapPin className="h-3.5 w-3.5" />
                 <span>{temple.location}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="container py-8">
+        <div className="container py-16">
           {temple.description && (
-            <div className="max-w-3xl mb-10">
-              <h2 className="font-display text-xl font-semibold mb-3">About This Temple</h2>
-              <p className="text-muted-foreground whitespace-pre-line">{temple.description}</p>
+            <div className="max-w-3xl mb-16">
+              <span className="label-mono-sm text-foreground/40">01 / About</span>
+              <h2 className="mt-2 font-display text-3xl font-light mb-4">About this temple</h2>
+              <p className="text-foreground/70 leading-relaxed whitespace-pre-line">{temple.description}</p>
             </div>
           )}
 
           {pujas.length > 0 && (
             <div>
-              <h2 className="font-display text-2xl font-semibold mb-6">Pujas at This Temple</h2>
+              <span className="label-mono-sm text-foreground/40">02 / Pujas</span>
+              <h2 className="mt-2 mb-8 font-display text-3xl font-light">Available pujas</h2>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {pujas.map((puja) => <PujaCard key={puja.id} puja={puja} />)}
               </div>
