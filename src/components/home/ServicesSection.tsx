@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { BookOpen, Calendar, Music, Sparkles, Store, Video } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Card3D } from "@/components/three/Card3D";
 
 const services = [
   { title: "Puja Seva", desc: "Book personalized pujas performed at temples", icon: Sparkles, to: "/pujas" },
@@ -13,7 +13,7 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="bg-gradient-warm py-16 md:py-20">
+    <section id="services" className="relative bg-gradient-warm py-16 md:py-20">
       <div className="container">
         <div className="mx-auto mb-10 max-w-2xl text-center">
           <h2 className="font-display text-3xl font-bold md:text-4xl">One platform for your devotional needs</h2>
@@ -22,39 +22,35 @@ export function ServicesSection() {
           </p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((item) => (
-            <Link
-              key={item.title}
-              to={item.to as any}
-              className={cn(
-                "group rounded-2xl border border-border bg-card p-6 shadow-card transition-all",
-                "hover:-translate-y-0.5 hover:shadow-warm focus:outline-none focus:ring-2 focus:ring-ring"
-              )}
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                  <item.icon className="h-6 w-6 text-primary" />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-display text-lg font-semibold">{item.title}</h3>
-                    <span className="text-sm text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
-                      Explore →
-                    </span>
+            <Card3D key={item.title} intensity={8}>
+              <Link
+                to={item.to as any}
+                className="group block h-full rounded-2xl surface-3d p-6 lift-3d focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                <div className="flex items-start gap-4" style={{ transform: "translateZ(30px)" }}>
+                  <div
+                    className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-saffron text-primary-foreground shadow-[0_10px_20px_-6px_rgba(217,122,44,0.55),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-3px_0_rgba(120,50,5,0.35)]"
+                    style={{ transform: "translateZ(20px)" }}
+                  >
+                    <item.icon className="h-6 w-6" />
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
+                  <div className="min-w-0">
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="font-display text-lg font-semibold">{item.title}</h3>
+                      <span className="text-sm text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                        Explore →
+                      </span>
+                    </div>
+                    <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </Card3D>
           ))}
-        </div>
-
-        <div className="mt-10 text-center text-sm text-muted-foreground">
-          More features (music, literature, panchang) can be wired as you expand—this section is ready for it.
         </div>
       </div>
     </section>
   );
 }
-
